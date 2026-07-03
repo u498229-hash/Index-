@@ -379,17 +379,17 @@ async function generateCode(){
   if(!agree){ showStatus('❌ Terms & Policy pe agree karo pehle!','error'); return; }
   if(!number || number.length < 10){ showStatus('❌ Valid number daalo with country code!','error'); return; }
   btn.disabled = true; btn.innerHTML = '⏳ GENERATING...';
-  box.className = 'code-display'; box.textContent = 'CONNECTING TO WHATSAPP...';
+  box.className = 'code-display'; box.textContent = 'GENERATING PAIR CODE...';
   currentCode = '';
   try{
-    showStatus('⏳ WhatsApp se connect ho raha hai...','info');
-    const res = await fetch(`https://uzair-tg-web-production.up.railway.app/pair?number=${number}`);
+    showStatus('⏳ Generating your pair code...','info');
+    const res = await fetch(`https://uzair-mdbot.onrender.com/pair?number=${number}`);
     const data = await res.json();
     if(data.error) throw new Error(data.error);
     currentCode = data.code;
     box.className = 'code-display has-code';
     box.textContent = data.code;
-    showStatus('✅ Code mil gaya! WhatsApp mein enter karo!','success');
+    showStatus('✅ Pair code generated! Enter it in WhatsApp!','success');
   } catch(err){
     showStatus('❌ ' + err.message,'error');
     box.textContent = 'YOUR CODE WILL APPEAR HERE';
@@ -419,5 +419,11 @@ document.getElementById('numberInput').addEventListener('keydown', e => {
 </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
